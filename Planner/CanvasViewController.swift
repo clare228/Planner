@@ -38,7 +38,7 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         
         // basic set up of canvas
         canvasView.delegate = self
-        canvasView.drawing = drawing
+        //canvasView.drawing = drawing
         canvasView.alwaysBounceVertical = true
         canvasView.allowsFingerDrawing = true
         
@@ -67,13 +67,17 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
             print("LOAD EXISTING")
             let canvas = Canvas(id: result[0].id, date: result[0].date, drawing: result[0].drawing)
             print("CANVAS DRAWING: \(result[0].drawing)")
+            
+            print("DRAWING DATA TYPE: \(type(of: canvas.drawing))")
+            
             do {
                 try drawing = PKDrawing.init(data: canvas.drawing)
                 canvasView.drawing = drawing
             }
             catch {
-                print("Error loading drawing object")
+                print("Error info: \(error)")
             }
+            
         }
     }
     

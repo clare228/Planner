@@ -155,14 +155,11 @@ class CanvasManager {
                 result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawingPtr!.load(as: Data.self)))
                 print("DRAWING NOT NIL")
             }
-            else { // sqlite3_column_blob(statement, 2) is nil even when there is drawing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            else {
                 let drawing = Data.init()
                 result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawing))
                 print("DRAWING IS NIL")
             }
-            
-            // append drawing to result
-            //result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawingPtr.load(as: Data.self)))
         }
         
         // finalise
