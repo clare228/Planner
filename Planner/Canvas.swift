@@ -7,6 +7,7 @@
 //
 // Database for notes/drawings
 
+
 import Foundation
 import SQLite3
 
@@ -20,7 +21,6 @@ class CanvasManager {
     
     var database: OpaquePointer!
     
-    // allow class to be called
     static let main = CanvasManager()
     private init() {
     }
@@ -37,12 +37,12 @@ class CanvasManager {
         do {
             let databaseURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("drawings.sqlite3")
             
-            // open db file!!!!
+            print("DATABASE PATH: \(databaseURL.path)")
+            
             if sqlite3_open(databaseURL.path, &database) != SQLITE_OK {
                 print("Could not open database")
             }
                                     
-            // create table
             if sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS drawings (date TEXT, drawing BLOB)", nil, nil, nil) != SQLITE_OK {
                 print("Could not create table")
             }
@@ -57,103 +57,108 @@ class CanvasManager {
     // return row id of newly inserted row
     func create(date: Date, drawing: Data) -> Int {
         connect()
-        
-        // prepare statment
-        var statement: OpaquePointer!
-        if sqlite3_prepare_v2(database, "INSERT INTO drawings (date, drawing) VALUES (?, ?)", -1, &statement, nil) != SQLITE_OK {
-            print("Could not create (insert) query")
-            return -1
-        }
+               
+        return drawing.withUnsafeBytes { drawingBuffer -> Int in
+                   
+            let drawingPtr = drawingBuffer.baseAddress!
+            
+            var statement: OpaquePointer!
+            if sqlite3_prepare_v2(database, "INSERT INTO drawings (date, drawing) VALUES (?, ?)", -1, &statement, nil) != SQLITE_OK {
+                print("Could not create (insert) query")
+                return -1
+            }
+                    
+            sqlite3_bind_text(statement, 1, NSString(string: dateToStringFormat(dateDate: date)).utf8String, -1, nil)
+            sqlite3_bind_blob(statement, 1, drawingPtr, -1, nil)
+                    
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print("Could not execute insert statement")
+                return -1
+            }
                 
-        // bind
-        sqlite3_bind_text(statement, 1, NSString(string: dateToStringFormat(dateDate: date)).utf8String, -1, nil)
-        let drawingPtr = dataToPtr(drawing: drawing)
-        sqlite3_bind_blob(statement, 1, drawingPtr, -1, nil)
-                
-        // execute statement
-        if sqlite3_step(statement) != SQLITE_DONE {
-            print("Could not execute insert statement")
-            return -1
+            sqlite3_finalize(statement)
+            return Int(sqlite3_last_insert_rowid(database))
         }
-        
-        // Finalise statement
-        sqlite3_finalize(statement)
-        return Int(sqlite3_last_insert_rowid(database))
+       
     }
     
     // Function to save drawing to database
     func save(canvas: Canvas) {
         connect()
         
-        // prepare
-        var statement: OpaquePointer!
-        if sqlite3_prepare_v2(database, "UPDATE drawings SET date = ?, drawing = ? WHERE rowid = ?", -1, &statement, nil) != SQLITE_OK {
-            print("Could not create (update) query")
+        let drawingData = canvas.drawing
+        
+        drawingData.withUnsafeBytes { drawingBuffer in
+            
+            let drawingPtr = drawingBuffer.baseAddress!
+            
+            var statement: OpaquePointer!
+
+            if sqlite3_prepare_v2(database, "UPDATE drawings SET drawing = ? WHERE rowid = ?", -1, &statement, nil) != SQLITE_OK {
+                print("Could not create (update) query")
+            }
+
+            let count = Int32(drawingBuffer.count)
+            
+            sqlite3_bind_blob(statement, 1, drawingPtr, count, nil)
+            sqlite3_bind_int(statement, 2, Int32(canvas.id))
+    
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print("Could not execute update statement")
+            }
+            
+            sqlite3_finalize(statement)
+    
         }
-        
-        // bind place holders
-        sqlite3_bind_text(statement, 1, NSString(string:dateToStringFormat(dateDate: canvas.date)).utf8String, -1, nil)
-        print("DRAWING SAVED: \(canvas.drawing)")
-        let drawingPtr = dataToPtr(drawing: canvas.drawing)
-        sqlite3_bind_blob(statement, 2, drawingPtr, -1, nil)
-        sqlite3_bind_int(statement, 3, Int32(canvas.id))
-        
-        // execute
-        if sqlite3_step(statement) != SQLITE_DONE {
-            print("Could not execute update statement")
-        }
-        
-        // finalise
-        sqlite3_finalize(statement)
     }
     
     // Function to delete drawing
     func delete(canvas: Canvas) {
         connect()
         
-        // prepare
         var statement: OpaquePointer!
         if sqlite3_prepare_v2(database, "DELETE FROM drawings WHERE rowid = ?", -1, &statement, nil) != SQLITE_OK {
             print("Could not create (delete) query")
         }
         
-        // bind
         sqlite3_bind_int(statement, 1, Int32(canvas.id))
         
-        // execute
         if sqlite3_step(statement) != SQLITE_DONE {
             print("Could not execute delete statement")
         }
         
-        // finalise
         sqlite3_finalize(statement)
     }
     
-    // Function to check if canvas for a certain date is already in the database
+    // Function to check if canvas for a certain date is already in the database, if exists, return canvas
     func check(selectedDate: Date) -> [Canvas] {
         connect()
         
         var result: [Canvas] = []
-        // prepare
+
         var statement: OpaquePointer!
         if sqlite3_prepare_v2(database, "SELECT rowid, date, drawing FROM drawings WHERE date = ?", -1, &statement, nil) != SQLITE_OK {
             print("Could not create (select) query")
             return []
         }
-        
-        // bind
+
         sqlite3_bind_text(statement, 1, NSString(string:dateToStringFormat(dateDate: selectedDate)).utf8String, -1, nil)
         
-        // executes
         while sqlite3_step(statement) == SQLITE_ROW {
             
-            // change string date into Date date
             let Date_date = stringToDateFormat(stringDate: String(cString: sqlite3_column_text(statement, 1)))
-            // if canvas is empty
+
             if sqlite3_column_blob(statement, 2) != nil {
-                let drawingPtr = sqlite3_column_blob(statement, 2)
-                result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawingPtr!.load(as: Data.self)))
-                print("DRAWING NOT NIL")
+                
+                print("DRAWING IS NOT NIL")
+
+                let drawingPtr = sqlite3_column_blob(statement, 2)!
+
+                let drawingLength = Int(sqlite3_column_bytes(statement, 2))
+
+                let drawing = Data(bytes: drawingPtr, count: drawingLength)
+
+                result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawing))
             }
             else {
                 let drawing = Data.init()
@@ -162,10 +167,7 @@ class CanvasManager {
             }
         }
         
-        // finalise
         sqlite3_finalize(statement)
-        
-
         
         return result
     }
@@ -203,4 +205,5 @@ class CanvasManager {
         let rawPtr = nsData.bytes
         return rawPtr
     }
+        
 }

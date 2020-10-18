@@ -38,7 +38,6 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         
         // basic set up of canvas
         canvasView.delegate = self
-        //canvasView.drawing = drawing
         canvasView.alwaysBounceVertical = true
         canvasView.allowsFingerDrawing = true
         
@@ -52,25 +51,24 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         }
         
         // Find if current date has drawing saved
+        // Check if canvas for selected date has already been created
         let result = CanvasManager.main.check(selectedDate: selectedDate!)
-        print("Result when view load: \(result)")
-        // if no drawing match the date
+        
+        // If canvas for selected date has not yet been created
         if Mirror(reflecting: result).children.count == 0 {
             // create new canvas to store in db
-            print("CREATING")
+            print("CREATING NEW CANVAS")
             _ = CanvasManager.main.create(date: selectedDate!, drawing: drawing.dataRepresentation())
             let _ = CanvasManager.main.check(selectedDate: selectedDate!)
-            print("DRAWING: \(drawing.dataRepresentation())")
         }
         else {
             // load existing drawing
-            print("LOAD EXISTING")
+            print("LOAD EXISTING CANVAS")
             let canvas = Canvas(id: result[0].id, date: result[0].date, drawing: result[0].drawing)
-            print("CANVAS DRAWING: \(result[0].drawing)")
-            
-            print("DRAWING DATA TYPE: \(type(of: canvas.drawing))")
-            
+                       
             do {
+                
+                // Try to populate drawing with previous canvas drawing
                 try drawing = PKDrawing.init(data: canvas.drawing)
                 canvasView.drawing = drawing
             }
@@ -81,16 +79,15 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         }
     }
     
-    // When view dismss!!!!!!!
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         let result = CanvasManager.main.check(selectedDate: selectedDate!)
-        print("Result when disappear: \(result)")
-        print("Count: \(Mirror(reflecting: result).children.count)")
+        
+        // If canvas created in database, save drawing to canvas object
         if Mirror(reflecting: result).children.count != 0 {
-            print("GO TO UPDATE OR DELETE")
+            print("UPDATE OR DELETE CANVAS")
+            // Create canvas object of current drawing
             let canvas = Canvas(id: result[0].id, date: result[0].date, drawing: drawing.dataRepresentation())
-            print("NEW DRAWING: \(canvas.drawing)")
             /*
             // if canvas is empty, delete from db
             if drawing.bounds.isEmpty {
@@ -102,7 +99,7 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
                 print("UPDATE")
                 CanvasManager.main.save(canvas: canvas)
             }*/
-            print("UPDATE")
+            print("UPDATING CANVAS")
             CanvasManager.main.save(canvas: canvas)
         }
     }
