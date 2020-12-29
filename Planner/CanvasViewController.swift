@@ -50,7 +50,6 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
             canvasView.becomeFirstResponder()
         }
         
-        // Find if current date has drawing saved
         // Check if canvas for selected date has already been created
         let result = CanvasManager.main.check(selectedDate: selectedDate!)
         
@@ -67,10 +66,11 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
             let canvas = Canvas(id: result[0].id, date: result[0].date, drawing: result[0].drawing)
                        
             do {
-                
+                var oldDrawing = PKDrawing()
                 // Try to populate drawing with previous canvas drawing
-                try drawing = PKDrawing.init(data: canvas.drawing)
-                canvasView.drawing = drawing
+                try oldDrawing = PKDrawing.init(data: canvas.drawing)
+                print("DRAWING: \(oldDrawing)")
+                canvasView.drawing = oldDrawing
             }
             catch {
                 print("Error info: \(error)")
@@ -78,7 +78,7 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
             
         }
     }
-    
+    /* DONT NEED as saved whenever canvas changed
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         let result = CanvasManager.main.check(selectedDate: selectedDate!)
@@ -86,6 +86,9 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         // If canvas created in database, save drawing to canvas object
         if Mirror(reflecting: result).children.count != 0 {
             print("UPDATE OR DELETE CANVAS")
+            
+            // NEW 29/12/2020: attempt to update pkdrawing with new strokes
+            
             // Create canvas object of current drawing
             let canvas = Canvas(id: result[0].id, date: result[0].date, drawing: drawing.dataRepresentation())
             /*
@@ -102,7 +105,7 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
             print("UPDATING CANVAS")
             CanvasManager.main.save(canvas: canvas)
         }
-    }
+    }*/
     
     // hide home button on certain devices
     override var prefersHomeIndicatorAutoHidden: Bool {
@@ -127,6 +130,23 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
     // update contentsize every time drawing changes
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
         updateContentSizeForDrawing()
+        
+        let result = CanvasManager.main.check(selectedDate: selectedDate!)
+        
+        // COPIED FROM ABOVE, save drawing
+        // If canvas created in database, save drawing to canvas object
+        if Mirror(reflecting: result).children.count != 0 {
+            print("UPDATE OR DELETE CANVAS")
+            
+            // NEW 29/12/2020: attempt to update pkdrawing with new strokes
+            
+            // Create canvas object of current drawing
+            let canvas = Canvas(id: result[0].id, date: result[0].date, drawing: canvasView.drawing.dataRepresentation())
+
+            print("UPDATING CANVAS, canvasViewDrawingDidChange")
+            CanvasManager.main.save(canvas: canvas)
+        }
+       
     }
     
     /* ------------------------------------------------------------------------------------- */

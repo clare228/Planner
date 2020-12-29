@@ -151,12 +151,13 @@ class CanvasManager {
             if sqlite3_column_blob(statement, 2) != nil {
                 
                 print("DRAWING IS NOT NIL")
-
+                
+                // Convert UnsafeRawPointer into data
                 let drawingPtr = sqlite3_column_blob(statement, 2)!
-
                 let drawingLength = Int(sqlite3_column_bytes(statement, 2))
-
                 let drawing = Data(bytes: drawingPtr, count: drawingLength)
+                
+                print("DRAWING LENGTH: \(drawingLength)")
 
                 result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawing))
             }
