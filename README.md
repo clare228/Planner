@@ -2,8 +2,10 @@
 Daily planner iOS application which implements FSCalendar and PencilKit
 
 # Progress
-Basic functions completed
-Next steps - tidy code
+1st version completed
+Next steps:
+1) Tidy code
+2) Write unit tests
 
 # Current functions
 1) Home view: calendar
