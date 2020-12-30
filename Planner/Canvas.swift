@@ -25,6 +25,7 @@ class CanvasManager {
     private init() {
     }
     
+    
     // Function to connect database
     func connect() {
         
@@ -33,7 +34,7 @@ class CanvasManager {
             return
         }
         
-        // Create path in user's device
+        // Create path and db in user's device
         do {
             let databaseURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("drawings.sqlite3")
             
@@ -112,6 +113,7 @@ class CanvasManager {
         }
     }
     
+    /*
     // Function to delete drawing
     func delete(canvas: Canvas) {
         connect()
@@ -128,7 +130,8 @@ class CanvasManager {
         }
         
         sqlite3_finalize(statement)
-    }
+    } */
+    
     
     // Function to check if canvas for a certain date is already in the database, if exists, return canvas
     func check(selectedDate: Date) -> [Canvas] {
@@ -149,22 +152,17 @@ class CanvasManager {
             let Date_date = stringToDateFormat(stringDate: String(cString: sqlite3_column_text(statement, 1)))
 
             if sqlite3_column_blob(statement, 2) != nil {
-                
-                print("DRAWING IS NOT NIL")
-                
+                                
                 // Convert UnsafeRawPointer into data
                 let drawingPtr = sqlite3_column_blob(statement, 2)!
                 let drawingLength = Int(sqlite3_column_bytes(statement, 2))
                 let drawing = Data(bytes: drawingPtr, count: drawingLength)
                 
-                print("DRAWING LENGTH: \(drawingLength)")
-
                 result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawing))
             }
             else {
                 let drawing = Data.init()
                 result.append(Canvas(id: Int(sqlite3_column_int(statement, 0)), date: Date_date, drawing: drawing))
-                print("DRAWING IS NIL")
             }
         }
         
@@ -206,5 +204,4 @@ class CanvasManager {
         let rawPtr = nsData.bytes
         return rawPtr
     }
-        
 }
