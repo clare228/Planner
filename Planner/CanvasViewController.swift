@@ -63,7 +63,17 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         updateAndSaveCanvas(result: result)
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // query returns [Canvas] where date = selectedDate
+        let result = CanvasManager.main.check(selectedDate: selectedDate!)
+        
+        if canvasIsEmpty() {
+            print("DELETE CANVAS")
+            CanvasManager.main.delete(canvas: result[0])
+        }
+    }
     
     /* ----------------------- */
     /* --- Other Functions --- */
@@ -133,7 +143,6 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
     func createNewCanvas() {
         print("CREATING NEW CANVAS")
         _ = CanvasManager.main.create(date: selectedDate!, drawing: drawing.dataRepresentation())
-        //let _ = CanvasManager.main.check(selectedDate: selectedDate!)
     }
     
     func loadOldDrawing(result: [Canvas]) {
@@ -169,5 +178,12 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
             
             CanvasManager.main.save(canvas: canvas)
         }
+    }
+    
+    func canvasIsEmpty() -> Bool {
+        if canvasView.drawing.bounds.isEmpty {
+            return true
+        }
+        return false
     }
 }

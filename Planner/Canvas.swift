@@ -113,7 +113,7 @@ class CanvasManager {
         }
     }
     
-    /*
+    
     // Function to delete drawing
     func delete(canvas: Canvas) {
         connect()
@@ -130,7 +130,7 @@ class CanvasManager {
         }
         
         sqlite3_finalize(statement)
-    } */
+    }
     
     
     // Function to check if canvas for a certain date is already in the database, if exists, return canvas
