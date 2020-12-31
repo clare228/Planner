@@ -23,7 +23,7 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
     @IBOutlet var canvasView: PKCanvasView!
     @IBAction func fingerPencilToggle (_ sender: Any) {
         canvasView.allowsFingerDrawing.toggle()
-        pencilFingerButton.title = canvasView.allowsFingerDrawing ? "Finger" : "Pencil"
+        pencilFingerButton.title = canvasView.allowsFingerDrawing ? "Pencil" : "Finger"
     }
     
     
