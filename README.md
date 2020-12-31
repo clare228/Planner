@@ -9,6 +9,6 @@ Daily planner iOS application which implements FSCalendar and PencilKit
 1) Home view: calendar
 2) Click on a day in calendar leads to a canvas for that day where user can make notes/draw
 
-
+!(../master/Images/Simulator Screen Shot - iPad Pro (11-inch) (2nd generation) - 2020-12-31 at 19.44.42.png)
 
 
