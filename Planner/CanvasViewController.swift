@@ -79,6 +79,18 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
     /* --- Other Functions --- */
     /* ----------------------- */
     
+    func displayDateOnCanvas() {
+        if let selectedDate = selectedDate {
+            dateLabel.text = CanvasManager.main.dateToStringShow(dateDate: selectedDate)
+        }
+    }
+    
+    func setupCanvas() {
+        canvasView.delegate = self
+        canvasView.alwaysBounceVertical = true
+        canvasView.allowsFingerDrawing = true
+    }
+    
     func updateContentSizeForDrawing() {
         let drawing = canvasView.drawing
         let contentHeight: CGFloat
@@ -91,23 +103,6 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         }
         
         canvasView.contentSize = CGSize(width: canvasWidth * canvasView.zoomScale , height: contentHeight)
-    }
-    
-    func dismissView() {
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func displayDateOnCanvas() {
-        if let selectedDate = selectedDate {
-            dateLabel.text = CanvasManager.main.dateToStringShow(dateDate: selectedDate)
-        }
-    }
-    
-    func setupCanvas() {
-        canvasView.delegate = self
-        canvasView.alwaysBounceVertical = true
-        canvasView.allowsFingerDrawing = true
     }
     
     func setupToolpicker() {

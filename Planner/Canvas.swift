@@ -22,8 +22,7 @@ class CanvasManager {
     var database: OpaquePointer!
     
     static let main = CanvasManager()
-    private init() {
-    }
+    //private init() {}
     
     
     // Function to connect database
@@ -171,7 +170,9 @@ class CanvasManager {
         return result
     }
     
-    /* ------------------------------------------------------------------------- */
+    /* ----------------------- */
+    /* --- Other Functions --- */
+    /* ----------------------- */
     
     // Function to turn string date into Date date
     func stringToDateFormat(stringDate: String) -> Date {
@@ -184,7 +185,6 @@ class CanvasManager {
     func dateToStringFormat(dateDate: Date) -> String {
         let formatter = ISO8601DateFormatter()
         let stringDate = formatter.string(from: dateDate)
-        
         return stringDate
     }
     
@@ -194,7 +194,8 @@ class CanvasManager {
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         let stringDate = formatter.string(from: dateDate)
-        
+        print("Date: \(dateDate)")
+        print("String: \(stringDate)")
         return stringDate
     }
     

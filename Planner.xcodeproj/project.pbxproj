@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120821A5259D20DD00A3D65B /* PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120821A4259D20DD00A3D65B /* PlannerTests.swift */; };
+		120821B3259D212500A3D65B /* PlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120821B2259D212500A3D65B /* PlannerUITests.swift */; };
 		12279D7924FC4A1B00B3432A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12279D7824FC4A1B00B3432A /* AppDelegate.swift */; };
 		12279D7B24FC4A1B00B3432A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12279D7A24FC4A1B00B3432A /* SceneDelegate.swift */; };
 		12279D7D24FC4A1B00B3432A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12279D7C24FC4A1B00B3432A /* CalendarViewController.swift */; };
@@ -18,8 +20,31 @@
 		54EF3A380298447A1E065345 /* Pods_Planner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBB3AD311E76EE28FCCAC523 /* Pods_Planner.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		120821A7259D20DD00A3D65B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12279D6D24FC4A1B00B3432A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12279D7424FC4A1B00B3432A;
+			remoteInfo = Planner;
+		};
+		120821B5259D212500A3D65B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12279D6D24FC4A1B00B3432A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12279D7424FC4A1B00B3432A;
+			remoteInfo = Planner;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0D548342BA856E3B3B478D9C /* Pods-Planner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Planner.debug.xcconfig"; path = "Target Support Files/Pods-Planner/Pods-Planner.debug.xcconfig"; sourceTree = "<group>"; };
+		120821A2259D20DD00A3D65B /* PlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		120821A4259D20DD00A3D65B /* PlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerTests.swift; sourceTree = "<group>"; };
+		120821A6259D20DD00A3D65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		120821B0259D212500A3D65B /* PlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		120821B2259D212500A3D65B /* PlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerUITests.swift; sourceTree = "<group>"; };
+		120821B4259D212500A3D65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12279D7524FC4A1B00B3432A /* Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12279D7824FC4A1B00B3432A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12279D7A24FC4A1B00B3432A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +60,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1208219F259D20DD00A3D65B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		120821AD259D212500A3D65B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12279D7224FC4A1B00B3432A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -55,10 +94,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		120821A3259D20DD00A3D65B /* PlannerTests */ = {
+			isa = PBXGroup;
+			children = (
+				120821A4259D20DD00A3D65B /* PlannerTests.swift */,
+				120821A6259D20DD00A3D65B /* Info.plist */,
+			);
+			path = PlannerTests;
+			sourceTree = "<group>";
+		};
+		120821B1259D212500A3D65B /* PlannerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				120821B2259D212500A3D65B /* PlannerUITests.swift */,
+				120821B4259D212500A3D65B /* Info.plist */,
+			);
+			path = PlannerUITests;
+			sourceTree = "<group>";
+		};
 		12279D6C24FC4A1B00B3432A = {
 			isa = PBXGroup;
 			children = (
 				12279D7724FC4A1B00B3432A /* Planner */,
+				120821A3259D20DD00A3D65B /* PlannerTests */,
+				120821B1259D212500A3D65B /* PlannerUITests */,
 				12279D7624FC4A1B00B3432A /* Products */,
 				0A6F873FBF053E4B14411EF9 /* Pods */,
 				FDB85E6AFFC4D8A2AF416E37 /* Frameworks */,
@@ -69,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				12279D7524FC4A1B00B3432A /* Planner.app */,
+				120821A2259D20DD00A3D65B /* PlannerTests.xctest */,
+				120821B0259D212500A3D65B /* PlannerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +161,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		120821A1259D20DD00A3D65B /* PlannerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 120821A9259D20DD00A3D65B /* Build configuration list for PBXNativeTarget "PlannerTests" */;
+			buildPhases = (
+				1208219E259D20DD00A3D65B /* Sources */,
+				1208219F259D20DD00A3D65B /* Frameworks */,
+				120821A0259D20DD00A3D65B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				120821A8259D20DD00A3D65B /* PBXTargetDependency */,
+			);
+			name = PlannerTests;
+			productName = PlannerTests;
+			productReference = 120821A2259D20DD00A3D65B /* PlannerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		120821AF259D212500A3D65B /* PlannerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 120821B7259D212500A3D65B /* Build configuration list for PBXNativeTarget "PlannerUITests" */;
+			buildPhases = (
+				120821AC259D212500A3D65B /* Sources */,
+				120821AD259D212500A3D65B /* Frameworks */,
+				120821AE259D212500A3D65B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				120821B6259D212500A3D65B /* PBXTargetDependency */,
+			);
+			name = PlannerUITests;
+			productName = PlannerUITests;
+			productReference = 120821B0259D212500A3D65B /* PlannerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		12279D7424FC4A1B00B3432A /* Planner */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12279D8924FC4A1C00B3432A /* Build configuration list for PBXNativeTarget "Planner" */;
@@ -129,6 +226,14 @@
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "Andrea Clare Lam";
 				TargetAttributes = {
+					120821A1259D20DD00A3D65B = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = 12279D7424FC4A1B00B3432A;
+					};
+					120821AF259D212500A3D65B = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = 12279D7424FC4A1B00B3432A;
+					};
 					12279D7424FC4A1B00B3432A = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -148,11 +253,27 @@
 			projectRoot = "";
 			targets = (
 				12279D7424FC4A1B00B3432A /* Planner */,
+				120821A1259D20DD00A3D65B /* PlannerTests */,
+				120821AF259D212500A3D65B /* PlannerUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		120821A0259D20DD00A3D65B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		120821AE259D212500A3D65B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12279D7324FC4A1B00B3432A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,6 +329,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1208219E259D20DD00A3D65B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				120821A5259D20DD00A3D65B /* PlannerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		120821AC259D212500A3D65B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				120821B3259D212500A3D65B /* PlannerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12279D7124FC4A1B00B3432A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,6 +358,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		120821A8259D20DD00A3D65B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12279D7424FC4A1B00B3432A /* Planner */;
+			targetProxy = 120821A7259D20DD00A3D65B /* PBXContainerItemProxy */;
+		};
+		120821B6259D212500A3D65B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12279D7424FC4A1B00B3432A /* Planner */;
+			targetProxy = 120821B5259D212500A3D65B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		12279D7E24FC4A1B00B3432A /* Main.storyboard */ = {
@@ -242,6 +392,84 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		120821AA259D20DD00A3D65B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M68JF4G2G7;
+				INFOPLIST_FILE = PlannerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andreaclare228.PlannerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Planner.app/Planner";
+			};
+			name = Debug;
+		};
+		120821AB259D20DD00A3D65B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M68JF4G2G7;
+				INFOPLIST_FILE = PlannerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andreaclare228.PlannerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Planner.app/Planner";
+			};
+			name = Release;
+		};
+		120821B8259D212500A3D65B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M68JF4G2G7;
+				INFOPLIST_FILE = PlannerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andreaclare228.PlannerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Planner;
+			};
+			name = Debug;
+		};
+		120821B9259D212500A3D65B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M68JF4G2G7;
+				INFOPLIST_FILE = PlannerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andreaclare228.PlannerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Planner;
+			};
+			name = Release;
+		};
 		12279D8724FC4A1C00B3432A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -397,6 +625,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		120821A9259D20DD00A3D65B /* Build configuration list for PBXNativeTarget "PlannerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				120821AA259D20DD00A3D65B /* Debug */,
+				120821AB259D20DD00A3D65B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		120821B7259D212500A3D65B /* Build configuration list for PBXNativeTarget "PlannerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				120821B8259D212500A3D65B /* Debug */,
+				120821B9259D212500A3D65B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		12279D7024FC4A1B00B3432A /* Build configuration list for PBXProject "Planner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
