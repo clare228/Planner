@@ -1,7 +1,12 @@
 # Planner
 Daily planner iOS application which implements FSCalendar and PencilKit
 
-<img src="Images/Simulator Screen Shot - iPad Pro (11-inch) (2nd generation) - 2020-12-31 at 19.44.42.png">
+<p float="left">
+  <img src="Images/Simulator Screen Shot - iPad Pro (11-inch) (2nd generation) - 2020-12-31 at 19.44.42.png" width="45%" height=auto>
+  <img src="Images/Simulator Screen Shot - iPad Pro (11-inch) (2nd generation) - 2020-12-31 at 19.50.11.png" width="45%" height=auto>
+  <img src="Images/Simulator Screen Shot - iPad Pro (11-inch) (2nd generation) - 2020-12-31 at 19.53.36.png" width="45%" height=auto>
+</p>
+
 
 # Progress
 - Basic functionalities completed (UI and unit tests in progress)
