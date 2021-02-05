@@ -66,13 +66,16 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // query returns [Canvas] where date = selectedDate
+        // Delete current canvas if it is empty
+        /*
         let result = CanvasManager.main.check(selectedDate: selectedDate!)
-        
         if canvasIsEmpty() {
             print("DELETE CANVAS")
             CanvasManager.main.delete(canvas: result[0])
         }
+        */
+        
+        deleteCurrentCanvas()
     }
     
     /* ----------------------- */
@@ -180,5 +183,13 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
             return true
         }
         return false
+    }
+    
+    func deleteCurrentCanvas() {
+        let result = CanvasManager.main.check(selectedDate: selectedDate!)
+        if canvasIsEmpty() {
+            print("DELETE CANVAS")
+            CanvasManager.main.delete(canvas: result[0])
+        }
     }
 }
