@@ -21,10 +21,18 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var pencilFingerButton: UIBarButtonItem!
     @IBOutlet var canvasView: PKCanvasView!
+    @IBOutlet var clearCanvasButton: UIBarButtonItem!
+    
+
+    /* --- Actions --- */
     @IBAction func fingerPencilToggle (_ sender: Any) {
         canvasView.allowsFingerDrawing.toggle()
         pencilFingerButton.title = canvasView.allowsFingerDrawing ? "Pencil" : "Finger"
     }
+    @IBAction func clearCanvas (_ sender: Any) {
+        canvasView.drawing = PKDrawing()
+    }
+    
     
     
     
@@ -67,13 +75,6 @@ class CanvasViewController: UIViewController, PKCanvasViewDelegate, PKToolPicker
         super.viewWillDisappear(animated)
         
         // Delete current canvas if it is empty
-        /*
-        let result = CanvasManager.main.check(selectedDate: selectedDate!)
-        if canvasIsEmpty() {
-            print("DELETE CANVAS")
-            CanvasManager.main.delete(canvas: result[0])
-        }
-        */
         
         deleteCurrentCanvas()
     }

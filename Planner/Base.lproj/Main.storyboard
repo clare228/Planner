@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S71-Bc-i1j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S71-Bc-i1j">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,17 +19,17 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-Vu-Aa3" customClass="FSCalendar">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vwh-Vu-Aa3" secondAttribute="bottom" id="Bco-OT-Y73"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vwh-Vu-Aa3" secondAttribute="trailing" id="Lhg-Za-hGu"/>
                             <constraint firstItem="Vwh-Vu-Aa3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="azS-XS-zYL"/>
                             <constraint firstItem="Vwh-Vu-Aa3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vWQ-Ti-yFR"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="gbb-ji-oSg"/>
                     <connections>
@@ -55,10 +57,11 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTl-dG-aFz" customClass="PKCanvasView">
                                 <rect key="frame" x="0.0" y="135" width="414" height="727"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="GfF-Ph-Q37"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GfF-Ph-Q37" firstAttribute="bottom" secondItem="zTl-dG-aFz" secondAttribute="bottom" id="5IG-Ol-hv7"/>
                             <constraint firstItem="xMe-Vi-lBf" firstAttribute="top" secondItem="GfF-Ph-Q37" secondAttribute="top" constant="10" id="A6A-d7-CV1"/>
@@ -68,17 +71,24 @@
                             <constraint firstItem="zTl-dG-aFz" firstAttribute="top" secondItem="xMe-Vi-lBf" secondAttribute="bottom" constant="10" id="azv-xJ-NHW"/>
                             <constraint firstItem="GfF-Ph-Q37" firstAttribute="trailing" secondItem="zTl-dG-aFz" secondAttribute="trailing" id="jKy-hg-vYe"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="GfF-Ph-Q37"/>
                     </view>
                     <navigationItem key="navigationItem" id="vEA-P9-kfU">
-                        <barButtonItem key="rightBarButtonItem" title="Pencil" id="Gsv-kZ-gML">
-                            <connections>
-                                <action selector="fingerPencilToggle:" destination="b4M-Es-E1k" id="7XK-1I-blx"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Pencil" id="Gsv-kZ-gML">
+                                <connections>
+                                    <action selector="fingerPencilToggle:" destination="b4M-Es-E1k" id="7XK-1I-blx"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="trash" catalog="system" id="fgq-m8-oOX">
+                                <connections>
+                                    <action selector="clearCanvas:" destination="b4M-Es-E1k" id="ImB-sF-WLt"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="canvasView" destination="zTl-dG-aFz" id="vT6-d7-C2x"/>
+                        <outlet property="clearCanvasButton" destination="fgq-m8-oOX" id="yPt-Oy-P8I"/>
                         <outlet property="dateLabel" destination="xMe-Vi-lBf" id="LdO-nI-30O"/>
                         <outlet property="pencilFingerButton" destination="Gsv-kZ-gML" id="Prq-mh-qPS"/>
                     </connections>
@@ -106,4 +116,10 @@
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="trash" catalog="system" width="121" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
